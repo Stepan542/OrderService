@@ -1,0 +1,64 @@
+﻿@model Order
+
+@{
+    string action = ViewBag.Action ?? string.Empty;
+}
+
+<div class="container text-center">
+    @if (action?.ToLower() == "create")
+    {
+        <h2>Create an order</h2>
+
+    }
+
+    @if (action?.ToLower() == "edit")
+    {
+        <h2>Edit an order</h2>
+    }
+
+    @if (action?.ToLower() == "edit")
+    {
+        <input type="hidden" asp-for="Id" />
+    }
+
+    <!--<div class="text-danger" asp-validation-summary="All" />-->
+
+    <form method="post" asp-controller="Order" asp-action="@action" class="text-center">
+        <div class="form-group">
+            <label>Name of product</label>
+            <input asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Quantity</label>
+            <input asp-for="Quantity" class="form-control" />
+            <span asp-validation-for="Quantity" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Price</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Order date</label>
+            <input asp-for="OrderDate" type="date" class="form-control" />
+            <span asp-validation-for="OrderDate" class="text-danger"></span>
+        </div>
+
+        @if (action?.ToLower() == "create")
+        {
+            <button type="submit" class="btn btn-primary">Add order</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        }
+
+        @if (action?.ToLower() == "edit")
+        {
+            <button type="submit" class="btn btn-primary">Edit order</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        }
+    </form>
+</div>
+
